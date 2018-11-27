@@ -1,6 +1,7 @@
 from django.db import models
 from django.urls import reverse
 
+from django.conf import settings
 
 class CourseManager(models.Manager): #custom manager para adicionar algum método além dos métodos do manager padrão do django
 	
@@ -30,3 +31,28 @@ class Course(models.Model):
 		ordering = ['name'] #ordenação padronizada com que o django vai mostrar, se colocar o sinal negativo ante do name o django faria em ordem decrescente
 
 	objects = CourseManager() #informa que o CourseManager passa a ser o manager utilizado ao invés do padrão do django
+
+class Enrollment(models.Model):
+
+	STATUS_CHOICES = (
+		(0, 'Pendente'),
+		(1, 'Aprovado'),
+		(2, 'Cancelado'),
+	)
+
+	#chave estrangeira para usuário devo usar settings.AUTH_USER_MODEL
+	user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='Usuário', related_name='enrollments', on_delete=models.CASCADE) #related_name é um atributo criado no usuário para relacionamento com a tabela usuário
+	course = models.ForeignKey(Course, verbose_name='Curso', related_name='enrollments', on_delete=models.CASCADE)
+	status = models.IntegerField(verbose_name='Situação', choices=STATUS_CHOICES, default=0, blank=True)
+	created_at = models.DateTimeField('Criado em', auto_now_add=True)
+	update_at = models.DateField('Atualizado em ', auto_now=True)
+
+	def active(self):
+		self.status = 1
+		self.save()
+
+
+	class Meta:
+		verbose_name = 'Inscrição'
+		verbose_name_plural = 'Inscrições'
+		unique_together = ( ('user', 'course') ) #para esse model o django vai criar um índice de unicidade combinando dois ou mais campos, de modo que só tenha uma inscrição para um usuário em um curso

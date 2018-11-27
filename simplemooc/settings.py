@@ -129,3 +129,16 @@ LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_URL = 'logout'
 AUTH_USER_MODEL = 'accounts.User' #informa ao Django o model de usuário para ser utilizado
+
+#email com Django para testes no terminal
+#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#variável para
+CONTACT_EMAIL = 'joberthdavid@hotmail.com'
+
+#configuração de um servidor smtp gmail
+DEFAULT_FROM_EMAIL = 'Nome <joberthdavid@gmail.com>'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'joberthdavid@gmail.com'
+EMAIL_HOST_PASSWORD = '4436goianoGYN'
+EMAIL_PORT = 587
