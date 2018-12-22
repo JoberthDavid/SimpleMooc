@@ -136,7 +136,7 @@ AUTH_USER_MODEL = 'accounts.User' #informa ao Django o model de usuário para se
 CONTACT_EMAIL = 'joberthdavid@hotmail.com'
 
 #configuração de um servidor smtp gmail
-DEFAULT_FROM_EMAIL = 'Nome <joberthdavid@gmail.com>'
+DEFAULT_FROM_EMAIL = '<SimpleMOOC> <joberthdavid@gmail.com>'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'joberthdavid@gmail.com'

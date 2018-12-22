@@ -4,77 +4,77 @@
 
 {% block content %}
 
-<div class="pure-g-r content-ribbon">
+    <div class="pure-g-r content-ribbon">
 
-    <div class="pure-u-1">
+        <div class="pure-u-1">
 
-        <div class="l-box">
+            <div class="l-box">
 
-            <h4 class="content-subhead">Listagem de cursos do SimpleMOOC</h4>
+                <h4 class="content-subhead">Listagem de cursos do SimpleMOOC</h4>
 
-        </div>
-
-    </div>
-
-</div>
-
-{% for course in courses %}
-
-<div class="pure-g-r content-ribbon">
-
-    <div class="pure-u-1-3">
-
-        <div class="l-box">
-
-            <a href="{{ course.get_absolute_url }}">
-
-            {% if course.image %}
-
-            <img src="{{ course.image.url }}" alt="{{ course.name }}" />
-
-            {% else %}
-
-            <img src="{% static 'img/course-image.png' %}" alt="{{ course.name }}" />
-
-            {% endif %}
-
-            </a>
+            </div>
 
         </div>
 
     </div>
 
-    <div class="pure-u-2-3">
+        {% for course in courses %}
 
-        <div class="l-box">
+        <div class="pure-g-r content-ribbon">
 
-            <h4 class="content-subhead">
-<a href="{{ course.get_absolute_url }}" title="">{{ course.name }}</a>
-</h4>
+            <div class="pure-u-1-3">
 
-            {{ course.description|linebreaks }}
+                <div class="l-box">
+
+                    <a href="{{ course.get_absolute_url }}">
+
+                    {% if course.image %}
+
+                    <img src="{{ course.image.url }}" alt="{{ course.name }}" />
+
+                    {% else %}
+
+                    <img src="{% static 'img/course-image.png' %}" alt="{{ course.name }}" />
+
+                    {% endif %}
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            <div class="pure-u-2-3">
+
+                <div class="l-box">
+
+                    <h4 class="content-subhead">
+        <a href="{{ course.get_absolute_url }}" title="">{{ course.name }}</a>
+        </h4>
+
+                    {{ course.description|linebreaks }}
+
+                </div>
+
+            </div>
 
         </div>
 
-    </div>
+        {% empty %}
+        <div class="pure-g-r content-ribbon">
 
-</div>
+            <div class="pure-u-1">
 
-{% empty %}
-<div class="pure-g-r content-ribbon">
+                <div class="l-box">
 
-    <div class="pure-u-1">
+                    <p>Nenhum curso está disponível na plataforma</p>
 
-        <div class="l-box">
+                </div>
 
-            <p>Nenhum curso está disponível na plataforma</p>
+            </div>
 
         </div>
 
-    </div>
-
-</div>
-
-{% endfor %}
+        {% endfor %}
 
 {% endblock %}

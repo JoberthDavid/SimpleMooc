@@ -4,6 +4,8 @@ from django.conf import settings #importa todos os arquivos de configuração do
 
 from simplemooc.core.mail import send_mail_template #para importar a função de envio de email html da app Core
 
+from .models import Comment
+
 class ContactCourse(forms.Form):
 
 	name = forms.CharField(label='Nome', max_length=100)
@@ -26,3 +28,10 @@ class ContactCourse(forms.Form):
 		#segue a forma de enviar email html
 		template_name = 'courses/contact_email.html'
 		send_mail_template( subject, template_name, context, [settings.CONTACT_EMAIL])
+
+
+class CommentForm(forms.ModelForm):
+
+	class Meta:
+		model = Comment
+		fields = ['comment']

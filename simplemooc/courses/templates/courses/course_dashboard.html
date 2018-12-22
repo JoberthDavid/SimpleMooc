@@ -1,0 +1,45 @@
+{% extends "accounts/dashboard.html" %}
+
+{% block breadcrumb %}
+	{{ block.super }} <!-- chama o conteúdo do block pai -->
+
+	<li>/</li>
+	<li><a href="{% url 'announcements' course.slug %}">{{ course }}</a></li> 
+
+{% endblock %}
+
+{% block menu_options %}
+
+	<li class="pure-menu-heading">
+		{{ course }}
+	</li>
+
+	<li>
+		<a href="{% url 'lessons' course.slug %}">
+			<i class="fa fa-video-camera"></i>
+			Aulas e materiais
+		</a>
+	</li>
+
+	<li>
+		<a href="#">
+			<i class="fa fa-info-circle"></i>
+			Informações
+		</a>
+	</li>
+
+	<li>
+		<a href="{% url 'announcements' course.slug %}">
+			<i class="fa fa-envelope"></i>
+			Anúncios
+		</a>
+	</li>
+
+	<li>
+		<a href="#">
+			<i class="fa fa-comments"></i>
+			Fórum de dúvidas
+		</a>
+	</li>
+
+{% endblock %}

@@ -6,37 +6,52 @@
 {% block content %}
 
 <div class="pure-g-r content-ribbon">
-    <aside class="pure-u-1">
-        {% for message in messages %}
-        <p>{{ message }}</p>
-        {% endfor %}
-    </aside>
+
 
     <div class="pure-u-1">
         <ul class="pure-menu pure-menu-horizontal">
+
+            <aside>
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            </aside>
+
             {% block breadcrumb %} <!-- para caminho por meio de url-->
-            <li><a href="{% url 'dashboard' %}">Meu Painel</a></li>
+                <li><a href="{% url 'dashboard' %}">Painel</a></li>
             {% endblock %}
+
         </ul>
     </div>
     <div class="pure-u-1-3">
         <div class="pure-menu pure-menu-open">
             <ul>
-                <li class="pure-menu-heading">Bem vindo, {{ user }}</li>
-                    {% my_courses user %} <!-- carrega a função da template_tags com o parâmetro usuário -->
-                <li class="pure-menu-heading">Minha Conta</li>
-                <li>
-                    <a href="{% url 'edit' %}">
-                        <i class="fa fa-cog"></i>
-                        Editar Conta
-                    </a>
+                <li class="pure-menu-heading">
+                    Bem vindo, {{ user }}
                 </li>
-                <li>
-                    <a href="{% url 'edit_password' %}">
-                        <i class="fa fa-lock"></i>
-                        Editar Senha
-                    </a>
-                </li>
+
+
+                {% my_courses user %} <!-- carrega a função da template_tags com o parâmetro usuário -->
+
+                {% block menu_options %}
+
+                    <li class="pure-menu-heading">
+                        Conta
+                    </li>
+                    <li>
+                        <a href="{% url 'edit' %}">
+                            <i class="fa fa-cog"></i>
+                            Editar Conta
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{% url 'edit_password' %}">
+                            <i class="fa fa-lock"></i>
+                            Editar Senha
+                        </a>
+                    </li>
+                {% endblock %}
+
             </ul>
         </div>
     </div>
@@ -44,25 +59,26 @@
         <div class="inner">
             {% block dashboard_content %}
             
-            <h2>Meus cursos</h2>
-            
-            {% for enrollment in enrollments %}
-                <div class="well">
-                    
-                    <h3>{{ enrollment.course }} ( {{ enrollment.course.start_date|date:'d/m/Y'|default:'data não informada' }} ) </h3>
+                <h2>Meus cursos</h2>
+                
+                {% for enrollment in enrollments %}
+                    <div class="well">
+                        
+                        <h3>{{ enrollment.course }} ( {{ enrollment.course.start_date | date:'d/m/Y'|default:'data não informada' }} ) </h3>
 
-                    {{ enrollment.course.description|linebreaks}}
+                        {{ enrollment.course.description | linebreaks}}
 
-                    <div class="pure-controls">
+                        <div class="pure-controls">
 
-                        <a href="#" class="pure-button pure-button-primary">Acessar</a>
-                        <a href="#" class="pure-button pure-button-error">Cancelar</a>
+                            <a href="{% url 'announcements' enrollment.course.slug %}" class="pure-button pure-button-primary">Acessar curso</a>
+                            <a href="{% url 'undo_enrollment' enrollment.course.slug %}" class="pure-button button-error">Cancelar inscrição</a>
 
+                        </div>
                     </div>
-
-                </div>
-
-            {% endfor %}
+                    {% empty %}
+                        <aside class="pure-u-1">Nenhum curso encontrado.
+                        </aside>
+                {% endfor %}
 
             {% endblock %}
         </div>
