@@ -37,9 +37,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    #libs
+    'taggit',
+
+    #apps
     'simplemooc.core', #como eu movi a pasta core para dentro da pasta simplemooc torna-se necessário especificar o caminho
     'simplemooc.accounts',
-    'simplemooc.courses'
+    'simplemooc.courses',
+    'simplemooc.forum'
 ]
 
 MIDDLEWARE = [

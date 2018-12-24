@@ -24,7 +24,8 @@ urlpatterns = [
     path('admin/', admin.site.urls), #url remete para o app admin
     path('', include('simplemooc.core.urls')), #url remete para o app core
     path('conta/', include('simplemooc.accounts.urls')),#url remete para o app accounts
-    path('cursos/', include('simplemooc.courses.urls')),
+    path('cursos/', include('simplemooc.courses.urls')), #url remete para o app courses
+    path('forum/', include('simplemooc.forum.urls')), #url remete para o app forum
 ]
 
 if settings.DEBUG:

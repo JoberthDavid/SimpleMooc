@@ -55,6 +55,9 @@ class Enrollment(models.Model):
 	created_at = models.DateTimeField('Criado em', auto_now_add=True)
 	update_at = models.DateField('Atualizado em ', auto_now=True)
 
+	def __str__(self):
+		return self.user + " - " + self.course
+
 	def active(self):
 		self.status = 1
 		self.save()
