@@ -20,7 +20,7 @@ class Course(models.Model):
 	start_date = models.DateField('Data de início', null=True, blank=True) #campo pode ser vazio
 	image = models.ImageField(upload_to='courses/images', null=True, blank=True, verbose_name='Imagens') #o campo do tipo de imagem na verdade é só o caminho salvo no banco para a imagem
 	created_at = models.DateTimeField('Criado em', auto_now_add=True) #toda vez que for criado a data e hora é salva
-	update_at = models.DateTimeField('Atualizado em', auto_now=True) #toda vez que for salvo a data e hora é alterada
+	updated_at = models.DateTimeField('Atualizado em', auto_now=True) #toda vez que for salvo a data e hora é alterada
 
 	def __str__(self): #retorna a representação string dos objetos tipo Course
 		return self.name
@@ -53,7 +53,7 @@ class Enrollment(models.Model):
 	course = models.ForeignKey(Course, verbose_name='Curso', related_name='enrollments', on_delete=models.CASCADE)
 	status = models.IntegerField(verbose_name='Situação', choices=STATUS_CHOICES, default=0, blank=True)
 	created_at = models.DateTimeField('Criado em', auto_now_add=True)
-	update_at = models.DateField('Atualizado em ', auto_now=True)
+	updated_at = models.DateField('Atualizado em ', auto_now=True)
 
 	def __str__(self):
 		return self.user + " - " + self.course
@@ -76,7 +76,7 @@ class Announcement(models.Model):
 	title = models.CharField('Título', max_length=100)
 	content = models.TextField('Conteúdo')
 	created_at = models.DateTimeField('Criado em', auto_now_add=True)
-	update_at = models.DateField('Atualizado em ', auto_now=True)
+	updated_at = models.DateField('Atualizado em ', auto_now=True)
 
 	def __str__(self):
 		return self.title
@@ -92,7 +92,7 @@ class Comment(models.Model):
 	user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name='Usuário', on_delete=models.CASCADE)
 	comment = models.TextField('Comentário')
 	created_at = models.DateTimeField('Criado em', auto_now_add=True)
-	update_at = models.DateField('Atualizado em ', auto_now=True)
+	updated_at = models.DateField('Atualizado em ', auto_now=True)
 
 	class Meta:
 		verbose_name = 'Comentário'
@@ -122,7 +122,7 @@ class Lesson(models.Model):
 	number = models.IntegerField('Número (ordem)', blank=True, default=0)
 	release_date = models.DateField('Data de liberação', blank=True, null=True)
 	created_at = models.DateTimeField('Criado em', auto_now_add=True)
-	update_at = models.DateTimeField('Atualizado em', auto_now=True)
+	updated_at = models.DateTimeField('Atualizado em', auto_now=True)
 
 
 	course = models.ForeignKey(Course, verbose_name='Curso', on_delete=True, related_name='lessons')

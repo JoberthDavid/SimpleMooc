@@ -1,4 +1,3 @@
-
 import re #importa o módulo de validação Regex
 from django.db import models
 from django.core import validators

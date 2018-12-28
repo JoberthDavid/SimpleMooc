@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous"> -->
     <link rel="stylesheet" href="{% static '/css/font-awesome.css' %}" />
     <link rel="stylesheet" href="{% static '/css/styles.css' %}" />
+    <link rel="shortcut icon" href="{% static 'logo_icon.ico' %}" >
 </head>
 <body>
     <div class="header">
@@ -19,6 +20,7 @@
                 <li class="pure-menu-selected"><a href="{% url 'home' %}">Início</a></li>
                 <li><a href="{% url 'cursos' %}">Cursos</a></li>
                 <li><a href="{% url 'contact' %}">Contato</a></li>
+                <li><a href="{% url 'forum' %}">Fórum</a></li>
                 {% if user.is_authenticated %}
                     <li><a href="{% url 'dashboard' %}">Painel</a></li>
                     <li><a href="{% url 'logout' %}">Sair</a></li>
@@ -28,13 +30,22 @@
             </ul>
         </div>
     </div>
-    <div class="content">
-        {% block content %}{% endblock %}
 
-        <div class="footer">
-            Simple MOOC - Uma simples plataforma de ensino a distância
-        </div>
+    <div class="content">
+    {% if messages %}
+    <div class="pure-g-r content-ribbon">
+        <aside class="pure-u-1">
+            {% for message in messages %}
+            <p>{{ message }}</p>
+            {% endfor %}
+        </aside>
     </div>
-    <script src="http://yui.yahooapis.com/3.12.0/build/yui/yui-min.js"></script>
+    {% endif %}
+    {% block content %}{% endblock %}
+    <div class="footer">
+        Simple MOOC - Uma simples plataforma de ensino a distância
+    </div>
+</div>
+<script src="http://yui.yahooapis.com/3.12.0/build/yui/yui-min.js"></script>
 </body>
 </html>

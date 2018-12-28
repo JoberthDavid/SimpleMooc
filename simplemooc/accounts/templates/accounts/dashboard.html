@@ -7,22 +7,18 @@
 
 <div class="pure-g-r content-ribbon">
 
-
     <div class="pure-u-1">
-        <ul class="pure-menu pure-menu-horizontal">
 
-            <aside>
-                {% for message in messages %}
-                    <p>{{ message }}</p>
-                {% endfor %}
-            </aside>
+        <h1 >Painel</h1>
 
-            {% block breadcrumb %} <!-- para caminho por meio de url-->
-                <li><a href="{% url 'dashboard' %}">Painel</a></li>
+        <ul class="breadcrumb">
+            {% block breadcrumb %}
+            <li><a href="{% url 'dashboard' %}">Meu Painel</a></li>
             {% endblock %}
-
         </ul>
     </div>
+
+
     <div class="pure-u-1-3">
         <div class="pure-menu pure-menu-open">
             <ul>
@@ -58,9 +54,9 @@
     <div class="pure-u-2-3">
         <div class="inner">
             {% block dashboard_content %}
-            
-                <h2>Meus cursos</h2>
-                
+                <div class="well">
+                    <h2>Meus cursos</h2>
+                </div>
                 {% for enrollment in enrollments %}
                     <div class="well">
                         
